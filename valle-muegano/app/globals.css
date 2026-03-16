@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+  --primary: #002D72; /* Cobalt Blue Talavera */
+  --primary-foreground: #FFFFFF;
+  --secondary: #F0F4F8;
+  --secondary-foreground: #002D72;
+  --muted: #FAFAFA;
+  --muted-foreground: #737373;
+  --accent: #002D72;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FAFAFA;
+  --border: #E5E5E5;
+  --input: #E5E5E5;
+  --ring: #002D72;
+  --radius: 0rem;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+.text-cobalt {
+  color: #002D72;
+}
+
+.bg-cobalt {
+  background-color: #002D72;
+}
+
+.border-cobalt {
+  border-color: #002D72;
+}
+
+/* Talavera Decorative Border */
+.talavera-border {
+  border: 1px solid #002D72;
+  position: relative;
+}
+
+.talavera-border::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px dashed #002D72;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Luxury Spacing Utilities */
+.section-padding {
+  padding: 6rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 6rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 6rem 6rem;
+  }
+}
+
+.heading-extrabold {
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
