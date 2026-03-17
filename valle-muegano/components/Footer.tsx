@@ -1,36 +1,38 @@
-interface FooterProps {
-  t: {
-    desc: string;
-    rights: string;
-    contact: string;
-    legal: string;
-    privacy: string;
-  };
-}
+'use client'
+import { useLang } from '@/context/LanguageContext'
+import { t } from '@/lib/translations'
 
-export default function Footer({ t }: FooterProps) {
+export default function Footer() {
+  const { lang } = useLang()
+  const tx = t[lang]
+
   return (
-    <footer className="py-20 px-6 md:px-24 bg-black border-t border-white/5">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
-        <div>
-          <h3 className="text-lg font-black uppercase tracking-tighter text-white mb-2">Valle Muégano</h3>
-          <p className="text-xs text-neutral-600 uppercase tracking-widest leading-loose">
-            {t.desc} <br />
-            {t.rights}
-          </p>
-        </div>
+    <footer>
+      <div className="container">
+        <p className="footer-tagline">{tx.footer.tagline}</p>
         
-        <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-          <div className="space-y-4">
-            <span className="text-[10px] uppercase tracking-widest font-bold text-neutral-500">{t.contact}</span>
-            <p className="text-xs text-neutral-400">hola@vallemuegano.com</p>
+        <div className="footer-grid">
+          <div className="footer-col">
+            <span className="subtitle-label" style={{ display: 'block', marginBottom: '15px' }}>{tx.footer.location}</span>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Tehuacán, Puebla<br />México</p>
           </div>
-          <div className="space-y-4">
-            <span className="text-[10px] uppercase tracking-widest font-bold text-neutral-500">{t.legal}</span>
-            <p className="text-xs text-neutral-400 hover:text-white transition-colors cursor-pointer">{t.privacy}</p>
+          <div className="footer-col">
+            <span className="subtitle-label" style={{ display: 'block', marginBottom: '15px' }}>{tx.footer.contact}</span>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
+              <a href="mailto:hola@vallemuegano.com" style={{ color: 'inherit', textDecoration: 'none' }}>hola@vallemuegano.com</a><br />
+              +52 (238) 000 0000
+            </p>
+          </div>
+          <div className="footer-col">
+            <span className="subtitle-label" style={{ display: 'block', marginBottom: '15px' }}>{tx.footer.social}</span>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Instagram<br />LinkedIn</p>
           </div>
         </div>
+
+        <p className="copyright">
+          {tx.footer.rights}
+        </p>
       </div>
     </footer>
-  );
+  )
 }

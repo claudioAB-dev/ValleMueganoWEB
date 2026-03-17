@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valle Muégano | Tradición elevada a la Alta Mesa</title>
+    <meta name="description" content="Muéganos artesanales de Tehuacán para hoteles boutique y restaurantes de alta cocina.">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lora:wght@400&family=Montserrat:wght@300;500&display=swap');
+
+        :root {
+            --bg-primary: #1A1208;
+            --bg-secondary: #221A0O8; /* Corrected to #221A0E per prompt, but prompt said #221A0O8? No, looking at prompt... #221A0E */
+            --bg-secondary-actual: #221A0E;
+            --accent-primary: #C8922A;
+            --accent-secondary: #8B5E2A;
+            --text-primary: #F2E8D9;
+            --text-secondary: #A89070;
+            --accent-opacity: rgba(200, 146, 42, 0.4);
+            --transition-primary: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Lora', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 1;
+            margin: 40px 0;
+        }
+
+        .subtitle-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: clamp(10px, 1.5vw, 12px);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 18px 36px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-solid {
+            background-color: var(--accent-primary);
+            color: #1A1208;
+        }
+
+        .btn-solid:hover {
+            background-color: var(--accent-secondary);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .btn-ghost:hover {
+            background-color: var(--accent-primary);
+            color: #1A1208;
+        }
+
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-primary);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 30px 60px;
+            transition: var(--transition-primary);
+        }
+
+        nav.scrolled {
+            background-color: rgba(26, 18, 8, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 20px 60px;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .nav-separator {
+            color: var(--text-secondary);
+            opacity: 0.4;
+            font-size: 10px;
+        }
+
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transition: transform 0.6s ease;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(26,18,8,0.3) 0%, rgba(26,18,8,0.85) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-title-wrap {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .hero-line {
+            height: 1px;
+            width: 100%;
+            background-color: var(--accent-primary);
+            opacity: 0.6;
+            display: block;
+        }
+
+        .hero-badge {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            border: 1px solid var(--accent-primary);
+            padding: 8px 16px;
+            margin-top: 20px;
+            background: transparent;
+            color: var(--accent-primary);
+            display: inline-block;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Sections */
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        h2::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background-color: var(--accent-primary);
+            margin-bottom: 16px;
+            display: block;
+        }
+        
+        .no-decorator h2::before {
+            display: none;
+        }
+
+        /* Value Prop */
+        .value-section {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .value-image-wrap {
+            flex: 1.2;
+            position: relative;
+        }
+
+        .value-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background-image: url('https://images.unsplash.com/photo-1595053508491-a1d2e1329a4a?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.6s ease;
+        }
+
+        .value-image-border {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 1px solid var(--accent-primary);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .value-content {
+            flex: 1;
+        }
+
+        .tag-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .chip {
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            padding: 6px 14px;
+            text-transform: uppercase;
+        }
+
+        /* Specs */
+        .specs-bg {
+            background-color: var(--bg-secondary-actual);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 60px;
+        }
+
+        .spec-item {
+            padding: 60px 40px;
+            position: relative;
+            border-right: 1px solid rgba(200, 146, 42, 0.2);
+        }
+
+        .spec-item:last-child {
+            border-right: none;
+        }
+
+        .spec-num {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 80px;
+            color: var(--accent-primary);
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .spec-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .spec-content h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .spec-content p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Quote */
+        .quote-section {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .quote {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--accent-primary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Form */
+        .form-container {
+            border: 1px solid var(--accent-opacity);
+            padding: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(34, 26, 14, 0.5);
+        }
+
+        .form-badge {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 12px;
+        }
+
+        input {
+            background-color: #2A1F10;
+            border: none;
+            border-bottom: 1px solid var(--text-secondary);
+            color: var(--text-primary);
+            padding: 12px 0;
+            font-family: 'Lora', serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-bottom: 1px solid var(--accent-primary);
+        }
+
+        input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        /* Amazon Section */
+        .amazon-section {
+            text-align: center;
+            background-color: #0D0904;
+        }
+
+        .amazon-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--accent-opacity);
+        }
+
+        .footer-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 28px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .footer-col {
+            border-right: 1px solid rgba(200, 146, 42, 0.2);
+        }
+
+        .footer-col:last-child {
+            border-right: none;
+        }
+
+        .copyright {
+            margin-top: 60px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
+
+        /* Utils */
+        .text-center { text-align: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        
+        @media (max-width: 900px) {
+            .nav-links, .nav-separator { display: none; }
+            .logo { position: relative; left: 0; transform: none; }
+            .value-section { flex-direction: column; }
+            .specs-grid { grid-template-columns: 1fr; }
+            .spec-item { border-right: none; border-bottom: 1px solid rgba(200, 146, 42, 0.2); }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .form-container { padding: 40px 20px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+            .footer-col { border-right: none; padding-bottom: 20px; border-bottom: 1px solid rgba(200, 146, 42, 0.1); }
+        }
+
+        /* Hover image effects */
+        .hover-scale:hover .img-target {
+            transform: scale(1.03);
+        }
+        .img-target {
+            transition: transform 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#value">Propuesta</a></li>
+                <li class="nav-separator">·</li>
+                <li><a href="#specs">Especificaciones</a></li>
+            </ul>
+            
+            <a href="#" class="logo">Valle Muégano</a>
+
+            <ul class="nav-links">
+                <li><a href="#contact" class="subtitle-label" style="color: var(--accent-primary)">Solicitar Muestrario</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg img-target"></div>
+        <div class="hero-content reveal">
+            <div class="hero-title-wrap">
+                <div class="hero-line"></div>
+                <h1>La tradición elevada<br>a la Alta Mesa</h1>
+                <div class="hero-line"></div>
+            </div>
+            
+            <div class="hero-badge">
+                TEHUACÁN · PUEBLA · DESDE 1940
+            </div>
+
+            <p class="hero-desc">
+                Suministramos identidad local y sofisticación para los hoteles y restaurantes más exigentes del país. 
+                Calidad premium en cada pieza.
+            </p>
+
+            <div class="hero-ctas">
+                <a href="#contact" class="btn btn-solid">Solicitar Información</a>
+                <a href="#" class="btn btn-ghost">Ver Catálogo B2B</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="value">
+        <div class="container value-section">
+            <div class="value-image-wrap reveal hover-scale">
+                <div class="value-image img-target"></div>
+                <div class="value-image-border"></div>
+            </div>
+            
+            <div class="value-content reveal">
+                <span class="subtitle-label">— Nuestra Propuesta</span>
+                <h2>Más que un dulce,<br>una distinción local</h2>
+                
+                <p>
+                    Tanto en un turndown service de lujo como en el cierre de una cena de autor, 
+                    el detalle final define la memoria del comensal y el huésped.
+                </p>
+                <p style="margin-top: 20px;">
+                    Valle Muégano es el aliado estratégico para restaurantes y hoteles que buscan ofrecer 
+                    una experiencia de identidad poblana con estándares internacionales de calidad y frescura.
+                </p>
+
+                <div class="tag-chips">
+                    <span class="chip">Reserva</span>
+                    <span class="chip">Artesanal</span>
+                    <span class="chip">Destino</span>
+                    <span class="chip">Alta Gama</span>
+                    <span class="chip">Ingeniería del Sabor</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="specs" class="specs-bg">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="subtitle-label">Ingeniería del Sabor</span>
+                <h2 style="margin-top: 10px;">Especificaciones B2B</h2>
+            </div>
+
+            <div class="specs-grid">
+                <div class="spec-item reveal">
+                    <span class="spec-num">01</span>
+                    <div class="spec-content">
+                        <h3>Estandarización</h3>
+                        <p>Dimensiones y gramaje uniformes para asegurar una experiencia consistente en cada habitación o mesa de postres.</p>
+                    </div>
+                </div>
+                <div class="spec-item reveal">
+                    <span class="spec-num">02</span>
+                    <div class="spec-content">
+                        <h3>Vida de Anaquel</h3>
+                        <p>90 días de conservación óptima, facilitando el manejo de inventarios en cocinas y almacenes operativos.</p>
+                    </div>
+                </div>
+                <div class="spec-item reveal">
+                    <span class="spec-num">03</span>
+                    <div class="spec-content">
+                        <h3>Empaque Listo</h3>
+                        <p>Diseños optimizados para facilitar el servicio inmediato o la venta controlada en centros de consumo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section no-decorator">
+        <div class="container reveal">
+            <p class="quote">"El detalle final define la memoria del comensal."</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="reveal" style="text-align: center; margin-bottom: 60px;">
+                <span class="subtitle-label">Contacto Profesional</span>
+                <h2 style="margin-top: 10px;">Consulta Corporativa</h2>
+                <p style="max-width: 600px; margin: 20px auto 0; color: var(--text-secondary);">
+                    Solicite información técnica o un muestrario para su hotel o restaurante. 
+                    Un asesor especializado responderá a su solicitud.
+                </p>
+            </div>
+
+            <div class="form-container reveal">
+                <span class="form-badge">RESPUESTA EN MENOS DE 24 HRS · MUESTRA SIN COSTO</span>
+                
+                <form id="contactForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" placeholder="EJ. CARLOS MENDOZA" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Cargo</label>
+                            <input type="text" placeholder="EJ. DIRECTOR DE A&B" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Establecimiento</label>
+                            <input type="text" placeholder="NOMBRE DEL HOTEL O RESTAURANTE" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Corporativo</label>
+                            <input type="email" placeholder="EJEMPLO@CORPORATIVO.COM" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ciudad</label>
+                            <input type="text" placeholder="EJ. CANCÚN, RIVIERA MAYA" required>
+                        </div>
+                        <div class="form-group full-width" style="margin-bottom: 0;">
+                            <button type="submit" class="btn btn-solid" style="width: 100%;">Contactar a un asesor</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="amazon" class="amazon-section no-decorator">
+        <div class="container reveal">
+            <span class="subtitle-label">Consumer Experience</span>
+            <h2 class="amazon-title">¿Lo probaste en tu viaje?</h2>
+            <p style="max-width: 600px; margin: 0 auto 40px; color: var(--text-secondary);">
+                Lleva la tradición de Tehuacán directamente a tu mesa. Recibe la misma frescura 
+                y calidad premium en la puerta de tu casa.
+            </p>
+            <a href="#" class="btn btn-ghost">Comprar en Amazon <span style="margin-left: 10px;">→</span></a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-tagline">Tradición de Tehuacán para el mundo.</p>
+            
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <span class="subtitle-label" style="display: block; margin-bottom: 15px;">Ubicación</span>
+                    <p style="font-size: 14px; color: var(--text-secondary);">Tehuacán, Puebla<br>México</p>
+                </div>
+                <div class="footer-col">
+                    <span class="subtitle-label" style="display: block; margin-bottom: 15px;">Contacto</span>
+                    <p style="font-size: 14px; color: var(--text-secondary);">ventas@vallemuegano.com<br>+52 (238) 000 0000</p>
+                </div>
+                <div class="footer-col">
+                    <span class="subtitle-label" style="display: block; margin-bottom: 15px;">Redes</span>
+                    <p style="font-size: 14px; color: var(--text-secondary);">Instagram<br>LinkedIn</p>
+                </div>
+            </div>
+
+            <p class="copyright">
+                © 2026 VALLE MUÉGANO. TODOS LOS DERECHOS RESERVADOS.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal elements on scroll
+        const revealEntries = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealEntries.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // Navbar effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Form handling
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'ENVIANDO...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerText = 'SOLICITUD ENVIADA';
+                btn.style.backgroundColor = '#2A1F10';
+                btn.style.color = '#C8922A';
+                contactForm.reset();
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

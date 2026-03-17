@@ -19,21 +19,22 @@ export default function TechnicalSpecs({ t }: TechnicalSpecsProps) {
   ];
 
   return (
-    <section id="specs" className="section-padding bg-white border-y border-[#002D72]/10">
+    <section id="specs" className="py-24 md:py-32 bg-white px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <span className="text-[#002D72] text-[10px] uppercase tracking-[0.5em] font-bold block mb-4">{t.tag}</span>
-          <h2 className="text-3xl font-black uppercase tracking-tighter text-[#1A1A1A]">{t.title}</h2>
+        <div className="mb-20 text-center md:text-left">
+          <span className="text-[#002D72] text-[10px] uppercase tracking-[0.6em] font-bold block mb-6 opacity-70">{t.tag}</span>
+          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#1A1A1A] leading-tight">{t.title}</h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-l border-[#002D72]/10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-slate-100">
           {t.items.map((item, index) => (
-            <div key={index} className="p-12 border-r border-b md:border-b-0 border-[#002D72]/10 hover:bg-[#F0F4F8]/30 transition-colors group">
-              <div className="mb-8 p-4 border border-[#002D72]/10 w-fit group-hover:border-[#002D72] transition-colors">
+            <div key={index} className="p-10 md:p-16 border-b md:border-b-0 md:border-r border-slate-100 last:border-r-0 hover:bg-[#F8FAFC] transition-all duration-500 group relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-[#002D72] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              <div className="mb-10 p-5 border border-slate-100 w-fit group-hover:border-[#002D72]/30 transition-all duration-500 group-hover:shadow-lg shadow-blue-900/5 bg-white">
                 {icons[index]}
               </div>
-              <h3 className="text-lg font-bold uppercase tracking-widest text-[#002D72] mb-4">{item.title}</h3>
-              <p className="text-neutral-500 text-sm leading-relaxed">
+              <h3 className="text-[10px] uppercase tracking-[0.3em] font-black text-[#002D72] mb-6">{item.title}</h3>
+              <p className="text-slate-600 text-[15px] leading-loose font-medium opacity-80">
                 {item.desc}
               </p>
             </div>

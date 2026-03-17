@@ -1,63 +1,52 @@
-import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
+'use client'
+import Image from 'next/image'
+import { useLang } from '@/context/LanguageContext'
+import { t } from '@/lib/translations'
 
-interface HeroProps {
-  t: {
-    tag: string;
-    title1: string;
-    title2: string;
-    title3: string;
-    desc: string;
-    primaryCTA: string;
-    secondaryCTA: string;
-  };
-}
+export default function Hero() {
+  const { lang } = useLang()
+  const tx = t[lang]
 
-export default function Hero({ t }: HeroProps) {
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center section-padding pt-32 overflow-hidden bg-white">
-      <div className="absolute inset-0 z-0 opacity-[0.03]">
-        <Image 
-          src="/assets/hero.jpg" 
-          alt="Textura de Muégano" 
-          fill 
-          className="object-cover grayscale"
+    <header className="hero">
+      <div className="hero-bg">
+        <Image
+          src="/assets/muegano-tehuacanero.jpg"
+          alt="Textura de Muégano"
+          fill
+          priority
+          quality={90}
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          className="img-target"
         />
       </div>
-      
-      <div className="relative z-10 max-w-5xl w-full text-center">
-        <p className="text-[#002D72] text-xs uppercase tracking-[0.4em] font-bold mb-6 animate-fade-in">
-          {t.tag}
+      <div className="hero-content reveal">
+        <div className="hero-title-wrap">
+          <div className="hero-line"></div>
+          <h1 dangerouslySetInnerHTML={{ __html: tx.hero.h1.replace(' - ', '<br />') }} />
+          <div className="hero-line"></div>
+        </div>
+
+        <div className="hero-badge">
+          {tx.hero.badge}
+        </div>
+
+        <p className="hero-desc">
+          {tx.hero.desc}
         </p>
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase mb-8 leading-[0.9] text-[#1A1A1A]">
-          {t.title1} <br />
-          <span className="text-[#002D72]">{t.title2}</span> <br />
-          {t.title3}
-        </h1>
-        <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">
-          {t.desc}
-        </p>
-        
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <button className="w-full sm:w-auto bg-[#002D72] text-white px-10 py-5 text-xs font-bold uppercase tracking-widest hover:bg-[#001A44] transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-900/10">
-            {t.primaryCTA}
-            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+
+        <div className="hero-ctas">
+          <button
+            className="btn btn-solid"
+            onClick={() =>
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }
+          >
+            {tx.hero.cta1}
           </button>
-          <button className="w-full sm:w-auto border border-[#002D72]/20 text-[#002D72] px-10 py-5 text-xs font-bold uppercase tracking-widest hover:bg-[#002D72]/5 transition-all">
-            {t.secondaryCTA}
-          </button>
+          <a href="#" className="btn btn-ghost">{tx.hero.cta2}</a>
         </div>
       </div>
-
-      <div className="mt-20 relative w-full aspect-[21/9] max-w-7xl border border-[#002D72]/10 bg-[#F0F4F8] talavera-border overflow-hidden">
-        <Image 
-          src="/assets/detail.webp" 
-          alt="Valle Muégano Producto" 
-          fill 
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-white to-transparent"></div>
-      </div>
-    </section>
-  );
+    </header>
+  )
 }

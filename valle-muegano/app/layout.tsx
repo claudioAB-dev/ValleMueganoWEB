@@ -1,34 +1,47 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { Cormorant_Garamond, Montserrat, Lora } from 'next/font/google'
+import './globals.css'
+import RevealObserver from '@/components/RevealObserver'
+import { LanguageProvider } from '@/context/LanguageContext'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['300', '500'],
+  variable: '--font-montserrat',
+})
+
+const lora = Lora({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-lora',
+})
 
 export const metadata: Metadata = {
-  title: "Valle Muégano | Tradición de Tehuacán para Alta Hostelería",
-  description: "Muéganos premium artesanales diseñados como amenidades de lujo para hoteles y alta restauración. Identidad local y sofisticación para su operación.",
-};
+  title: 'Valle Muégano | Tradición elevada a la Alta Mesa',
+  description: 'Muéganos artesanales de Tehuacán para hoteles boutique y restaurantes de alta cocina.',
+  openGraph: {
+    title: 'Valle Muégano',
+    locale: 'es_MX',
+    type: 'website',
+  },
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="es" className={`${cormorant.variable} ${montserrat.variable} ${lora.variable}`}>
+      <body>
+        <LanguageProvider>
+          <RevealObserver />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
-  );
+  )
 }
